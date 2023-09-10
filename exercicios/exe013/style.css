@@ -1,0 +1,33 @@
+@charset "TF-08";
+
+
+body{
+    background-color: rgb(0, 0, 0);
+   
+
+
+}
+main{
+    background-image: -moz-linear-gradient(to right,rgb(255, 255, 255),);
+    width: auto;
+    padding: 80px;
+    margin-top: auto;
+}
+
+
+h1{
+    font-family: monospace,'JetBrains Mono';
+    font-weight: 600;
+    font-size: 3em;
+    color: darkblue;
+    text-align: center;
+}
+h3{
+    font-family: 'JetBrains Mono';
+    text-align: left;
+}
+p{
+    font-family: arial;
+    text-align: justify;
+    text-indent: 30px;
+}

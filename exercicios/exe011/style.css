@@ -1,0 +1,11 @@
+@charset "TF-8";
+
+body{
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+p{
+    font-size: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+}

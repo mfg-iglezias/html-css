@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inserindo videos</title>
+</head>
+<body>
+    <h1>Inserindo videos</h1>
+    <video width="250px" poster="" autoplay controls loop>
+        <!--‣ width vai indicar a largura que o vídeo vai ter na tela. Nesse exemplo, 250px. 
+        ‣ poster configura uma imagem que vai aparecer como uma capa, enquanto o 
+        visitante não aperta o play para reproduzir o vídeo 
+        ‣ controls vai configurar se os controles do vídeo vão aparecer na parte inferior da 
+        mídia. Por padrão, os controles não aparecerão, mas basta colocar a palavra 
+        controls na tag <video>. 
+        ‣ autoplay diz para o navegador se o vídeo vai começar a tocar automaticamente, 
+        assim que a página for carregada. -->
+        <source src="video (360p).mp4" type="video/mp4">
+        <source src="video (360p).mp4" type="video/webm">
+        <source src="video (360p).mp4" type="video/ogg">
+    </video>
+    <h1>Inserindo videos direto do YouTube</h1>
+    <iframe preload autoplay width="460" height="265" src="https://www.youtube.com/embed/h3ZDpSsKjR0?si=ZEP3ydH1W3pT4JWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    
+</body>
+</html>
