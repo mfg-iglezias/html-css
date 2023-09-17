@@ -1,0 +1,122 @@
+@charset "TF-08";
+
+
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    min-height: 100vw;
+}
+header {
+    background-color: black;
+    max-width: 100%;
+    height: 250px;
+    
+}
+header > h1 {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 8.4vw;
+    font-style: bold;
+    width: max-content;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%, -50%);
+}
+header > h4 {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.4em;
+    width: max-content;
+    position: absolute;
+    left: 50%;
+    top: 180px;
+    transform: translate(-50%, -50%);
+}
+header > h4 > a {
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+}
+a:hover{
+    color: rgba(255, 255, 255, 0.808) ;
+}
+main{
+    background-color: white;
+}
+article{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    font-size: 3.0vw;
+    line-height: 2em;
+    
+}
+.br1{
+    padding: 8vw 0vw 8vw 8vw
+    
+}
+ 
+#flor {
+    max-height: 100%vw;
+    
+    background-image: url('background001.jpg');  
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 8vw 0vw 8vw 8vw;
+    box-shadow: inset 6px 6px 13px rgba(0, 0, 0, 0.582);
+    
+}
+#flor > p {
+    
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.658);
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.411);
+    display: inline-block;
+    max-width: 75vw;
+    min-width: 36vw;
+    padding: 2px;
+    border-radius: 5px;
+    
+    
+}
+#livro {
+    max-height: 100%vw;
+    
+    background-image: url('background002.jpg');  
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 8vw 0vw 8vw 8vw;
+    box-shadow: inset 6px 6px 13px rgba(0, 0, 0, 0.589);
+}
+#livro > p {
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.733);
+    width: 150px;
+    background-color: rgba(0, 0, 0, 0.541);
+    display: inline-block;
+    max-width: 75vw;
+    min-width: 36vw;
+    padding: 2px;
+    border-radius: 5px;
+    
+}
+
+footer{
+    max-width: 100%;
+    background-color: black;
+}
+footer > p {
+    color: white;
+    text-align: center;
+    font-size: 1.5em ;
+    padding: 7px 0px 7px 0px;
+}
