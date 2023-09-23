@@ -1,0 +1,246 @@
+@charset "TF-08";
+
+@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Noto+Sans+Linear+B&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@0;1&family=Noto+Sans+Linear+B&family=Prata&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600&family=Inclusive+Sans:ital@0;1&family=Noto+Sans+Linear+B&family=Prata&display=swap');
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-image: url('imagens/fundo001.webp');
+    
+}
+header{
+    padding: 50px;
+    height: 400px;
+    background-image: url('imagens/GettyImages-1298951808-scaled.webp');  
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 8vw 0vw 8vw 8vw;
+    box-shadow: inset 6px 6px 13px rgba(0, 0, 0, 0.582);
+}
+header>h1{
+    color: white;
+    font-family: 'Prata', serif;
+    font-size: 5.7vw;
+    width: max-content;
+    position: absolute ;
+    left: 70%;
+    top: 300px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.61); 
+}
+header > h1 > strong {
+    color: #eeff00;
+}
+
+      
+
+/* Estilo da navbar lateral */
+.navbar {
+    background-color: #3333338f; /* Cor de fundo da navbar */
+    position: absolute ;
+    float: left;
+    left: 2%;
+    top: 40px;
+    margin-top: 70px;
+    background-color: #3333336b;
+    color: #fff;
+    padding: 20px;
+    max-width: 200px;
+    border-radius: 7px;
+    position: -webkit-sticky; /* Para navegadores WebKit (como Chrome e Safari) */
+    position: sticky; /* Padrão, funciona na maioria dos navegadores modernos */
+    top: 75px;
+    text-align: right;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.534);
+    
+    
+    
+}
+
+/* Estilo da lista de navegação */
+.nav-list {
+    list-style-type: none; /* Remove os marcadores de lista */
+    padding: 10px 0; /* Espaçamento interno superior e inferior */
+    font-family: 'El Messiri', sans-serif;
+}
+
+/* Estilo dos itens da lista de navegação */
+.nav-item {
+    margin-bottom: 10px; /* Espaçamento entre os itens */
+    list-style-type: none;
+}
+
+/* Estilo dos links */
+.nav-item a {
+    text-decoration: none; /* Remove a sublinhado dos links */
+    color: #fff; /* Cor do texto dos links */
+    font-weight: bold; /* Define o peso da fonte como negrito */
+    display: block; /* Transforma os links em blocos para ocupar toda a largura */
+    padding: 5px; /* Espaçamento interno dos links */
+    transition: 0.5s;
+}
+
+/* Estilo dos links quando hover (passar o mouse por cima) */
+.nav-item a:hover {
+    background-color: #ffe600a4; /* Cor de fundo no hover */
+    border-radius: 4px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.466);
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.466);
+    -webkit-transition: 0.5s; /* Com prefixo do 
+Safari */
+ transition: 1s; /* Para browsers que suportam 
+a propriedade */
+}
+
+
+main{
+    max-width: 800px;
+    margin: auto;
+    margin-top: 15px;
+    text-align: justify;
+    background-color: rgba(255, 255, 255, 0.979);
+    font-family: 'El Messiri', sans-serif;
+    font-size: 1.3em;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.603);
+    
+}
+main>p{
+    text-indent: 50px;
+    max-width: 700px;
+    padding: 10px 7px 5px 7px;
+    background-color: white;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 1.6em;
+}
+main>p::first-letter{
+    font-size: 1.6em; 
+    
+}
+main>h2{
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 1.4em;
+    background-image:linear-gradient(to bottom, #ffd900, white);
+    border-radius: 6px;
+    transition: 1s;
+    
+
+}
+main>h3{
+    text-align: center;
+    font-size: 1.2em;
+    background-image:linear-gradient(to bottom, #ffd900, white);
+    border-radius: 6px;
+    transition: 1s;
+}
+h2:hover{
+    font-size: 1.5em;
+    transition: 2s;
+}
+h3:hover{
+    font-size: 1.4em;
+    transition: 2s;
+
+}
+aside>h4{
+    background-color: black;
+    color: white;
+    font-size: 1.4em;
+    text-align: center;
+    font-family: 'Noto Sans Linear B', sans-serif;
+}
+picture>p{
+    font-style: italic;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    color: rgba(51, 51, 51, 0.781);
+    line-height: 1em;
+    padding: 5px 60px 10px 60px;
+    text-align: center;
+    transition: 0.7s;
+}
+img{
+    max-width: 80vw;
+    min-width: 300px;
+    max-height: 500px;
+    display: block;
+    margin: auto;
+    margin-top: 40px;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);  
+    
+}
+img:hover {
+    border: solid .7px rgb(251, 255, 0);
+    
+  }
+  picture>p:hover{
+    color: rgb(0, 0, 0);
+    transition: 0.5s; /* Com prefixo do 
+   Safari */
+    transition: 0.5s; /* Para browsers que suportam 
+   a propriedade */
+  }
+  
+table{
+            max-width: 700px;
+            border-collapse: collapse;
+            margin: 0px;
+            margin: auto;
+            font-size: 0.8em;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.158);  
+            
+}
+thead{
+    background-color: rgb(248, 232, 0);
+    color: rgb(0, 0, 0);
+    padding: 0px 10px 0px 10px;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 5px;
+}
+td,th,tr{
+    border: 1px solid black;
+    text-align: center;
+    padding: 4px 8px 4px 8px;
+    transition: 0.5s;
+    
+}
+tr:nth-child(2n)/* efeito zebrado */{
+    background-color: rgba(143, 81, 40, 0.226); 
+    
+}
+tr:hover {
+    background-color: #fbff00;
+    color: rgb(20, 20, 20);
+ background: rgb(255, 230, 86);
+ -webkit-transition: 0.5s; /* Com prefixo do 
+Safari */
+ transition: 1s; /* Para browsers que suportam 
+a propriedade */
+  }
+  td:hover {
+    color: rgb(0, 0, 0);
+ background: rgb(255, 238, 0);
+ transition: 0.5s; /* Com prefixo do 
+Safari */
+ transition: 0.5s; /* Para browsers que suportam 
+a propriedade */
+}
+  
+  td:focus {
+    outline: 2px solid #0078d4;
+  }

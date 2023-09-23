@@ -1,0 +1,23 @@
+
+
+div {
+    width:250px;
+    height:250px;
+    margin:30% auto 0;
+    background:black;
+
+    -webkit-animation: rodaroda 3s linear infinite 
+alternate;
+}
+@-webkit-keyframes rodaroda {
+    0% {
+    -webkit-transform:rotate(0deg);
+     }
+    50% {
+    background:red;
+    -webkit-transform:rotate(180deg);
+     }
+    100% {
+    -webkit-transform:rotate(360deg);
+     }
+    }

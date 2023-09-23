@@ -1,0 +1,75 @@
+
+
+h1{
+    color: red;
+}
+
+/* 2- Sintaxe */
+@media screen and (max-width: 500px) {
+/* MAX WIDTH = TELA MENORES DE ALGUMA RESOLUÇÃO */
+    h1{
+        color: blue;
+    }
+}
+/* 3- Outros modos */
+/* screem, print,speech, All */
+
+@media print and (max-width: 600px){
+    h1{
+        color: green;
+    }
+    /* serve para quando se quer imprimir a folha 'preview do print' em outras condicoes específicas */
+}
+/* 4- Todos os modos 'All'*/
+
+@media (max-width: 700px) { 
+   /* não é necessario inserir ALL na sintaxe pois o mesmo é o Default,config padrão */
+    h2 {
+        color: purple;
+    }
+}
+
+/* 5 - Mobile first */
+/* min-width > max-width */
+/* inicia o desenvolvimento das telas menores para as maiores */
+
+@media (min-width: 200px) {
+    h2{
+        color: aqua;
+    }
+}
+
+/* 6 - AND na media query */
+@media (min-width: 300px) and (max-width: 400px) {
+    h3{
+        font-size: 3em;
+    }
+}
+
+/* 7 - Orientation ''indentifica quando o celular esta virado,ou landscape'' */
+
+@media (orientation: landscape) {
+
+    h3 {
+        color: black;
+    }
+}
+
+/* 8 - OR na media query */
+@media (max-width: 200px), (orientation: landscape) {
+    h3{
+        font-size: 4em;
+    }
+}
+
+/* 9 - Cuidado ao aplicar media query */
+/* Ordem no CSS importa, vale oque vem por ultimo */
+/* MQ são as ultimas regras do código */
+@media (min-width: 600px) {
+    h4{
+        color: red
+    }
+}
+
+/* 10 - breakpoints */
+

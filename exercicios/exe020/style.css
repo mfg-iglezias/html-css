@@ -1,0 +1,30 @@
+
+.geral {
+    display: “aaa”
+    “bcd”
+    “eee”;
+   }
+   nav.menu {position:a;}
+   aside.menulateral {position:b;}
+   aside.publicidade {position:d;}
+   article.post {position:c;}
+   footer {position:e;}
+
+   body {
+    display: “a b”
+    10em *;
+   }
+   #nav {
+    position: a;
+   }
+   #content {
+    position: b;
+    display: “c . d . e “
+    “. . . . . “ /1em
+    “. . f . . “
+    * 1em * 1em *;
+   }
+   .module.news {position: c;}
+   .module.sports {position: d;}
+   .module.personal {position: e;}
+   #foot {position: f;}

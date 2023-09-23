@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goat Xadrez</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content">
+        <header>
+        
+        
+            <h1>Precisão, Ratings e <br><strong>GOATs</strong></h1>
+        
+        
+        </header>
+        <aside>
+            <h4>
+                de: GM Hissha.
+                Sep 4, 2023
+            </h4>
+        </aside>
+        <nav class="navbar">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#prg">Inicio</a></li>
+                <li class="nav-item"><a href="#pxq">Precisão x Qualidade</a></li>
+                <li class="nav-item"><a href="#mt">Metodologia</a></li>
+                <li class="nav-item"><a href="#er">Estimando Rating</a></li>
+                <li class="nav-item"><a href="#og">O que há em um GOAT?</a></li>
+                    <ul>
+                        <li class="nav-item"><a href="#m1">Método 1</a></li>
+                        <li class="nav-item"><a href="#m2">Método 2</a></li>
+                        <li class="nav-item"><a href="#m3">Método 3</a></li>
+                    </ul>
+                <li class="nav-item"><a href="#cc">Conclusão</a></li>
+            </ul>
+        </nav>
+        <main>
+        
+            <h2 id="prg">Precisão Ratings e GOATs</h2>
+
+            <p>Houve muitas tentativas de estimar as classificações dos jogadores de xadrez, tanto do passado quanto do presente, olhando para suas pontuações de jogo e comparando os movimentos com as escolhas de um motor de topo, incluindo um estudo notável aqui no Chess.com em 2017.</p>
+        
+            <p>
+                Essas tentativas têm sido geralmente corretas em mostrar o avanço constante da habilidade de xadrez ao longo do tempo,
+                mas na maioria das vezes têm sido pouco convincentes em realmente comparar jogadores individuais; um estudo chegou a classificar
+                José Capablanca como o melhor jogador de todos os tempos! Ele pode ter sido o melhor de todos os tempos em relação aos seus
+                colegas ou tinha mais talento (embora essa não seja a minha conclusão), mas para sugerir que ele realmente jogou tão bem quanto o
+                GM Garry Kasparov ou o GM Vladimir Kramnik no pico (este estudo foi feito antes do GM Magnus Carlsen chegar ao local), mesmo após a abertura,
+                simplesmente não é plausível; O conhecimento do xadrez avançou tremendamente desde 1920.
+            </p>
+        
+        
+        <picture><img src="imagens/capablanca.jpg" alt="Capablanca">
+        <p>Capablanca: O maior de todos os tempos? Na verdade, não.</p>
+        </picture>
+        
+        
+            <p>
+                A principal razão para a dificuldade em comparar jogadores é que aqueles que priorizam não perder e se destacam em finais
+                (Capablanca, GM Tigran Petrosian, GM Anatoly Karpov, talvez Carlsen) conseguem mais empates do que aqueles que priorizam a
+                vitória e se destacam no ataque (Alexander Alekhine, GM Mikhail Tal, Kasparov, GM Veselin Topalov), e empates mostram muito maior
+                 precisão (ou menores taxas de erro) do que jogos decisivos em geral.
+            </p>
+        
+            <p>
+                Na verdade, jogadores fortes geralmente mostram uma precisão de Chess.com maior em média para empates do que para vitórias!
+                 Isso cria um enorme viés para os jogadores cautelosos/finais se você derivar classificações de pontuações de precisão
+                ou taxas de erro. Minha solução para esse grande problema é simples: basta excluir os dados dos dados!
+                Isso parece colocar jogadores selvagens e cautelosos em pé de igualdade.
+            </p>
+        
+            <p>
+                A segunda questão é a força dos adversários. É mais fácil obter uma alta precisão (baixa taxa de erro) contra um oponente mais fraco
+                 do que contra um mais forte; O adversário mais forte colocará problemas que não são fáceis de resolver para um jogador mais fraco.
+                Jogadores que geralmente jogam adversários muito mais fracos terão melhor precisão do que jogadores semelhantes que normalmente jogam
+                 adversários iguais ou mais fortes.
+            </p>
+        
+        
+        <h2 id="pxq">Precisão x Qualidade</h2>
+        <p>
+            Em geral, uma vitória ou derrota é apenas parcialmente devido ao seu próprio bom ou mau jogo; Também pode ser devido ao jogo ruim ou bom do seu adversário.
+        
+            Como as vitórias normalmente obtêm cerca de seis pontos de precisão a mais do que as derrotas com jogadores iguais, adicionando 1,5 à pontuação
+             de precisão do perdedor e subtraindo 1,5 do vencedor, estou movendo-os cerca da metade para o meio, o que equivale a dividir o crédito pelo resultado
+            entre o bom jogo do vencedor e o jogo ruim do perdedor, uma suposição razoável e neutra. Fazer isso melhora drasticamente a precisão das estimativas de
+            classificação com base nas pontuações de precisão para indivíduos.
+        </p>
+        
+        <p><strong>"Em geral, uma vitória ou derrota é apenas parcialmente devido ao seu próprio bom ou mau jogo; Também pode ser devido ao jogo ruim ou bom do seu adversário."</strong></p>
+        
+        <p>
+            Usarei a palavra "Qualidade" para significar as pontuações de Precisão Chess.com para um jogador, excluindo empates, e com as vitórias e derrotas
+            ajustadas conforme explicado acima. Nesta barra lateral, mostro como esses números de qualidade se correlacionam muito bem com Chess.com classificações
+            em uma ampla faixa, tanto para classes de jogadores quanto para jogadores de topo individuais, e que a relação é próxima o suficiente para linear para os
+             propósitos deste artigo.
+        </p>
+        
+        <h2 id="mt">Metodologia</h2>
+        <p>
+            Para este estudo histórico de jogos jogados em limites de tempo padrão, limitei os dados a partidas e torneios clássicos do campeonato mundial
+            (incluindo campeonatos femininos), bem como jogos disputados em partidas de Candidatos que antecederam o Campeonato Mundial,
+            ou eventos de Candidatos a Duplas/Múltiplas Rodadas (RR) e RR Interzonais quando foram executados, bem como outras partidas entre campeões mundiais
+            e principais candidatos, mesmo que não relacionados ao título. Por "Campeonato Mundial", quero dizer eventos que eram geralmente aceitos como válidos
+            para decidir quem era o melhor jogador, independentemente de quem o executou ou se era tecnicamente chamado de "Campeonato Mundial".
+        </p>
+        
+        <picture><img src="imagens/Wilhelm Steinitz.jpg" alt="Wilhelm Steinitz">
+        <p>Wilhelm Steinitz: Oficialmente, o primeiro campeão mundial, mas não para os nossos propósitos</p>.</picture>
+        
+        <p>
+            Comecei com Louis de la Bourdonnais vs. Alexander MacDonnell em 1834, que foi geralmente considerado o primeiro jogo (na verdade seis partidas)
+            entre os melhores do mundo. Também incluí alguns torneios RR de alto nível em que a maioria dos jogadores estava entre os melhores do mundo na época,
+            a fim de ter jogos suficientes para comparar todos os campeões mundiais e seus desafiantes, e só considerei jogos para um determinado jogador durante
+            o que determinei ser seus anos de pico (um mínimo de três anos e duas partidas de qualificação quando possível). Ao limitar os eventos considerados
+            dessa maneira, reduzi muito o problema da "força do oponente", com o ajuste de vitória/derrota de 1,5 acima minimizando ainda mais esse problema.
+            Precisei de pelo menos 20 jogos não sorteados (19 para as duas primeiras campeãs) para inclusão na lista; a maioria tem entre 30 e 60 jogos desse tipo.
+        </p>
+        
+        <h2 id="er">Estimando Rating</h2>
+        <p>
+            Para traduzir os números de qualidade para uma classificação FIDE estimada, uma complicação foi que as classificações FIDE não têm sido constantes,
+            o que significa que uma determinada classificação não se traduz necessariamente na mesma qualidade de jogo em momentos diferentes. É bastante claro
+            que as classificações inflacionaram desde o início, em 1970, até por volta de 2006, quando o piso caiu abaixo de 1600, e logo começou a desinflar;
+            A FIDE está agora a considerar uma proposta para inverter a recente deflação, pelo menos abaixo do nível de 2000. Minha estimativa é que a deflação
+            recente praticamente anulou a inflação anterior no nível do grão-mestre, de modo que as classificações 2500+ da década de 1970 e as classificações de
+            hoje são bastante comparáveis, enquanto tais classificações na década de 1990 e por volta dela foram inflacionadas em 30 a 50 pontos.
+        </p>
+        
+        
+        <picture><img src="imagens/Kasparov2.jpg" alt="Kasparov">
+            <p>Kasparov: Atingiu o pico durante um período de inflação de rating, mas não o deixe ouvir falar disso.</p></picture>
+        
+        <p>
+            Portanto, as classificações que cito pretendem ser bastante precisas recentemente e na década de 1970, não tanto no meio.
+            Determinei que uma pontuação de qualidade de 90 equivalia muito perto de uma classificação FIDE de 2600 e que a "inclinação" da linha
+            que melhor se ajusta aos dados (na faixa de 2200+, pelo menos) é de cerca de 80, o que significa que cada ponto de qualidade acima
+            ou abaixo de 90 equivale a 80 pontos elo. Então a fórmula é:
+        
+            classificação FIDE estimada = qualidade * 80 - 4600
+        
+            Um jogador com a classificação FIDE mínima de 1000 teria uma qualidade de 70, enquanto a precisão perfeita obteria 3400,
+            aproximadamente o nível do motor de referência. Isso parece bastante razoável.
+        
+            A primeira conclusão do meu estudo é que o nível de jogo dos melhores jogadores melhorou cerca de 2,5 pontos Elo por ano de 1900 até agora.
+            A taxa de melhoria foi mais rápida na década de 1800, mas tem sido razoavelmente estável desde 1900. Provavelmente acelerou recentemente devido
+            à internet e aos motores, mas não há dados suficientes para medir isso, então estou tratando o ganho como uma constante por ano.
+        </p>
+        
+        <h2 id="og">O que há em um GOAT?</h2>
+        <p>
+            Proponho três maneiras de definir o "GOAT" ou "Maior de Todos os Tempos". Primeiro, podemos simplesmente comparar a qualidade de jogo
+            (isso exclui os movimentos iniciais que estão no livro Chess.com, mas isso deixa uma grande vantagem para os jogadores mais modernos).
+            Isso, é claro, geralmente mostra que o jogador de ponta mais recente é mais forte.
+        
+            O segundo método é creditar aos jogadores mais velhos os 2,5 Elo por ano entre seus anos de pico e o de Carlsen, que basicamente define
+            o melhor jogador de 1900 e Carlsen como "iguais", interpolando/extrapolando para os outros.
+        </p>
+        
+        
+        <picture><img src="imagens/CARLSEN PADRAO DE COMP.jpeg" alt="Magnus Carlsen">
+            <p>Carlsen: O padrão de comparação.</p>
+        </picture>
+        
+        <p>
+            O terceiro método reduz o crédito para dois pontos por ano para permitir o fato de que há muito mais jogadores sérios agora do que em 1900,
+            então ser o melhor em 1900 só pode ser comparável a ser o número dez ou vinte agora. Esse método estima como eles avaliariam agora se tivessem
+            por volta dos 30 anos de idade hoje e tivessem os mesmos benefícios dos motores e da internet que as estrelas de hoje; Você pode chamar isso de
+            uma medida de talento de xadrez.
+        
+            Estes três métodos levam a resultados muito diferentes.
+        </p>
+        
+        <h3 id="m1">Método 1</h3>
+        <p>
+            Usando o primeiro método, a seguir estão os jogadores que foram os maiores de todos os tempos durante seu período de pico.
+            Todos, exceto dois dos jogadores, foram campeões mundiais (ou considerados número um do mundo antes de Wilhelm Steinitz),
+            mas vários campeões mundiais não entraram na lista – porque, mesmo que fossem os melhores em seu auge, não conseguiram superar um ou mais antecessores.
+        
+            Maiores jogadores de todos os tempos, a partir de seus anos de pico. As classificações da FIDE são médias durante esses anos. Est. Elo pela fórmula Q x 80 - 4600.
+        </p>
+        
+        <table>
+            <thead><tr><th>Jogador</th> 	                    <th>Anos de pico</th>	<th>Qualidade</th>	<th>Est. Elo</th>	<th>Classificação FIDE</th></tr></thead>
+            <tbody>
+                <tr><td>Luís de la Bourdonnais</td>	       <td> 1834</td>	        <td>80.74</td>	    <td>1859</td>	    <td>-</td></tr>
+                <tr><td>Howard Staunton	</td>	           <td> 1843-1851</td>	    <td>82.2</td>	    <td>1976</td>	   <td> -</td></tr>
+                <tr><td>Paulo Morfa	</td>	               <td> 1857-1859</td>	    <td>87.64</td>	    <td>2411</td>	    <td>-</td></tr>
+                <tr><td>Guilherme Steinitz	</td>            <td>1872-1886	</td>    <td>88.22</td>	    <td>2458</td>	   <td> -</td></tr>
+                <tr><td>Harry Pillsbury	</td>	            <td>1897-1898</td>	   <td> 89.43</td>	    <td>2554</td>	   <td> -</td></tr>
+                <tr><td>Emanuel Lasker	</td>	            <td>1907-1914	</td>    <td>89.95	</td>    <td>2596</td>	    <td>-</td></tr>
+                <tr><td>José Capablanca	</td>	            <td>1921-1931</td>	    <td>90.24</td>	    <td>2619</td>	    <td>-</td></tr>
+                <tr><td>Alexandre Alekhine	 </td>          <td> 1927-1934</td>	    <td>90.6</td>	    <td>2648</td>	   <td> -</td></tr>
+                <tr><td>Rúben Multa</td>		                <td>1932-1949	</td>    <td>90.64	</td>    <td>2651</td>	   <td> -</td></tr>
+                <tr><td>Mikhail Botvinnik</td>	           <td> 1948-1955	</td>    <td>90.74</td>	    <td>2659</td>	   <td> -</td></tr>
+                <tr><td>Vasily Smyslov	</td>	            <td>1953-1957	</td>    <td>91.09</td>	    <td>2687</td>	   <td> -</td></tr>
+                <tr><td>Mikhail Tal		</td>                <td>1958-1960</td>	    <td>91.39</td>	    <td>2711</td>	   <td> -</td></tr>
+                <tr><td>Bobby Fischer	</td>	            <td>1970-1972</td>	    <td>92.52</td>	    <td>2802</td>	    <td>2762</td></tr>
+                <tr><td>Garry Kasparov	</td>	           <td> 1993-2001	</td>    <td>92.76</td>	    <td>2821</td>	   <td> 2809</td></tr>
+                <tr><td>Magnus Carlsen	</td>	            <td>2013-2021	 </td>   <td>93.23	</td>    <td>2858</td>	   <td> 2863</td></tr>
+            </tbody>
+        
+        </table>
+        <p>
+            Algumas notas: Os três primeiros jogaram antes do uso de relógios de xadrez, e tanto de la Bourdonnais quanto Paul Morphy jogaram muito mais rápido
+            do que seus adversários, provavelmente basicamente jogando o que chamaríamos de rápido em vez de padrão. Por causa disso, sua qualidade e estimativa Elo
+            são provavelmente muito baixas; talvez eles fossem 100 Elo ou mais alto se jogassem sob os limites de tempo da era Steinitz e tomassem seu tempo.
+        
+            Não sabemos realmente se Bourdonnais era o GOAT em 1834, já que seus grandes antecessores franceses François Philidor e Alexandre Deschapelles
+             jogavam principalmente jogos de handicap (e Philidor até jogava com regras diferentes, sob as quais nenhum jogador poderia ter duas rainhas).
+            Não há placares suficientes de jogos pares contra adversários dignos para julgá-los. O site de xadrez Edo classifica Bourdonnais e Deschapelles
+            como virtualmente empatados em 1821, o ano em que ambos jogaram um número decente de jogos. Estou supondo que o padrão de jogo havia subido em 1834,
+             ano em que Bourdonnais jogou as primeiras partidas que agora poderíamos chamar de "Campeonato Mundial". Então ele provavelmente foi o GOAT em 1834,
+            com um verdadeiro nível no xadrez padrão em 1900 a 2000 FIDE gama para os padrões de hoje.
+        
+            O britânico Howard Staunton era claramente mais forte, perto de 2000, e o nosso segundo GOAT. Adolph Anderssen não passou claramente Staunton até depois
+             que Morphy dominou, então ele nunca foi GOAT.
+        </p>
+        
+        
+        <picture><img src="imagens/STALTON.jpg" alt="Stalton">
+            <p>Staunton: O melhor até então, mas comparado ao que estava por vir...</p>
+        </picture>
+        
+        <p>
+            Morphy foi de longe o maior salto sobre seus antecessores e contemporâneos de qualquer um na história do xadrez. Seu estimado Elo saltou mais de 400 pontos
+            de Staunton, bem como sobre seus adversários mais fortes, para a moderna faixa de mestre internacional (2400+), e tendo em vista os comentários acima
+            sobre sua taxa de jogo, ele poderia ter alcançado a faixa GM (2500+) se tivesse continuado a jogar na era dos relógios de xadrez com longos limites de tempo.
+            Isso deixa bem claro que Staunton tinha bons motivos para se esquivar de Morphy. Na verdade, ele teria sido esmagado mesmo com handicap de peão e movimento,
+            um handicap estimado de 175 Elo, como Morphy acabou oferecendo a qualquer um no mundo, com bastante razão pelos meus números. Ainda hoje, Morphy seria o GOAT
+            se o seu critério fosse liderar sobre o próximo melhor jogador do mundo.
+        </p>
+        
+        
+        <picture><img src="imagens/MORFHY400.jpg" alt="Paul Morfhy">
+            <p>Morphy: 400 pontos à frente de seu tempo.</p>
+        </picture>
+        
+        <p>
+            Steinitz superou Morphy pelos números brutos em seu auge, que veio cerca de vinte anos depois do pico de Morphy, mesmo que eles tenham nascido no mesmo ano!
+            Se eles tivessem realmente jogado uma partida na década de 1860, a única década em que ambos estavam ativos, Morphy teria facilmente vencido,
+             mas Steinitz continuou a melhorar. Tendo em vista a questão da velocidade de jogo, minha crença é que Morphy teria até vencido Steinitz em seu auge,
+            supondo que Morphy tivesse mantido seu nível de jogo e que ele levasse Steinitz a sério e usasse o mesmo tempo, mas não temos informações suficientes
+            sobre o tempo gasto nas partidas para ter certeza disso. Os jogadores que jogaram contra ambos julgaram Morphy como o mais forte; na verdade,
+            dois deles tiraram chances de cavaleiro de Morphy, mas interpretaram Steinitz em termos pares!
+        </p>
+        
+        <p>
+            Harry Pillsbury foi o primeiro jogador da lista a cair claramente em território de grão-mestre, e também é um dos dois únicos que nunca foi campeão mundial
+             (ou mesmo desafiante). Seu status como GOAT em seus primeiros anos 1897-1898 é questionável apenas porque Emanuel Lasker já estava
+            mais ou menos no mesmo nível naquela época, embora seu próprio pico ainda estivesse a uma década de distância, mas a "Qualidade" de Lasker
+             em sua última partida com Steinitz estava um pouco abaixo do pico de Pillsbury, então eu dei GOAT a Pillsbury.
+        </p>
+        
+        <picture>
+            <img src="imagens/PILLSBURY.jpg" alt="Pillsbury">
+            <p>Pillsbury: Nunca campeão mundial, mas um dos maiores. Foto: Biblioteca Pública de Cleveland/Wikimedia, domínio público.</p>
+        </picture>
+        
+        <p>
+            Com um pico estimado de Elo perto de 2600, Lasker foi um GOAT muito claro durante um período de pico de oito anos.
+            Seu ganho sobre seu antecessor campeão mundial (Steinitz) foi o maior da história do xadrez durante os anos de um campeonato mundial formal.
+            Capablanca passou Lasker por uma quantidade modesta durante seu pico e foi o primeiro a passar 2600 pela minha fórmula; Alekhine, por sua vez,
+            superou Capablanca em uma quantidade semelhante, então ambos foram GOAT durante os anos de pico.
+        </p>
+        
+        <p>
+            O GM Rúben Fine foi o próximo GOAT e o segundo que nunca foi campeão do mundo ou desafiante. Como sua margem sobre Alekhine era de apenas três Elo,
+            o que é estatisticamente sem sentido, seu status GOAT poderia ser questionado. Ele dividiu o primeiro lugar à frente de Alekhine com o GM Paul Keres
+            no grande torneio AVRO de 1938, que deveria selecionar o desafiante de Alekhine, mas a Segunda Guerra Mundial interferiu. O GM Max Euwe,
+            que foi brevemente campeão mundial durante o reinado de Alekhine, não atingiu os níveis de qualidade de Capablanca, Alekhine ou Fine,
+            o que não é uma grande surpresa, já que poucos o classificaram como número um do mundo.
+        </p>
+        
+        <picture>
+            <img src="imagens/EUWE.jpg" alt="Euwe">
+            <p>Euwe: Campeão, mas nunca o GOAT. Foto: Harry Pot/Arquivo Nacional Holandês</p>
+        </picture>
+        
+        <p>
+            O GOAT seguinte, GM Mikhail Botvinnik, foi campeão mundial por muitos anos intermitentemente, embora sua margem de superioridade
+            sobre Alekhine e Fine em seus picos fosse pequena, um empate estatístico. Seu sucessor (tanto como GOAT quanto campeão mundial),
+            o GM Vasily Smyslov o superou por uma margem surpreendentemente grande; Smyslov talvez tenha sido mais forte do que geralmente lhe é dado crédito.
+        </p>
+        
+        <p>
+            O próximo GOAT, e o primeiro a passar um Elo estimado em 2700, foi o grande Tal de 1958-1960. Infelizmente, sua saúde era ruim e,
+            portanto, seus resultados após esse período foram muito inconsistentes para estender esse pico. Os dois campeões mundiais seguintes,
+            Petrosian e GM Boris Spassky, tiveram números de precisão próximos de Smyslov, mas nenhum deles atingiu o nível notável de pico Tal,
+            então eles nunca foram GOAT. Note que todos esses campeões soviéticos de Botvinnik a Spassky atingiram o pico antes do sistema oficial
+            de classificação da FIDE, mas tinham Elos estimados não oficiais na década de 1960 muito próximos dos meus Elos estimados para eles.
+        </p>
+        
+        <picture>
+            <img src="imagens/TAL.jpg" alt="Mikail Tal">
+            <p>Tal: Seus movimentos malucos o tornaram louco bom. Foto: Bert Verhoeff/Arquivo Nacional Holandês</p>
+        </picture>
+        
+        <p>
+            Agora chegamos ao incrível GM Bobby Fischer, que ultrapassou todos os adversários e antecessores para superar 2800 pelo meu método durante seu pico de 1970-72.
+            Sua classificação real da FIDE foi de 2762 durante esses anos, com um pico de 2785, mas se alguém fosse calcular sua classificação de
+            desempenho para os três anos, acredito que também ultrapassaria 2800, bastante consistente com minha estimativa. Seu salto Elo estimado de
+             90 pontos sobre todos os campeões mundiais anteriores foi o maior, exceto por Emanuel Lasker. É interessante que minha estimativa
+            Elo para ele exceda todos os jogadores posteriores, exceto Carlsen e Kasparov, e curiosamente os únicos jogadores agora classificados
+             acima de 2800 são Carlsen e Kasparov (última classificação 2812 em 2005).
+        </p>
+        
+        <picture>
+            <img src="imagens/BOBBY FISCHER.jpg" alt="Bobby Fischer">
+            <p>Fischer: Quase 100 pontos acima do GOAT anterior. Foto: Arquivo Nacional Holandês</p>
+        </picture>
+        <p>
+            O sucessor de Fischer, Karpov, superou todos os campeões anteriores, mas não o próprio Fischer, então ele não faz parte da lista do GOAT.
+            Kasparov passou Bobby por cerca de 20 Elo, e assim ele se qualifica como GOAT (sua classificação máxima da FIDE foi 66 acima de Fischer,
+            mas muito disso foi devido à inflação de classificação nos anos 80 e 90 e também à classificação de Fischer não ter chance suficiente de
+            alcançar seu desempenho devido à sua retirada repentina do jogo competitivo). Embora Kasparov tenha tido um pico maior e muito mais longo
+             do que Fischer, ele veio um quarto de século depois, durante o qual um ganho de 62 Elo verdadeiro teria sido esperado.
+        </p>
+        <picture>
+            <img src="imagens/KARPOV.jpg" alt="Karpov">
+            <p>
+                Karpov: Difícil conseguir o seu match com Fischer e Kasparov em ambos os lados. Foto: Marcel Antonisse/Arquivo Nacional Holandês
+            </p>
+        </picture>
+        <p>
+            Nenhum dos campeões depois de Kasparov o superou nem pelo pico estimado Elo nem pelo pico real de classificação da FIDE até Carlsen se tornar campeão.
+             Surpreendentemente para mim, nenhum deles sequer passou Fischer no pico estimado Elo. Mas, dado que nenhum deles está acima do pico de 2785 de Fischer
+            hoje agora que a inflação foi revertida, talvez seja verdade. O pico estimado de Kasparov de 2821 parece bastante consistente com seu pico FIDE de 2851,
+             dado que este foi perto do auge da inflação de classificação.
+        </p>
+        <p>
+            Carlsen superou Kasparov por 37 estimados Elo pelo meu método, e de fato, sua classificação máxima da FIDE foi 31 pontos maior do que a de Kasparov.
+            Seu pico estimado de Elo e sua classificação média real da FIDE durante esses anos diferem em apenas cinco pontos.
+        </p>
+        <p>
+            Carlsen é claramente o GOAT em termos de qualidade real de jogo, mas é claro, isso se deve em parte às muitas ferramentas que ele tem
+            disponíveis que seus antecessores não tinham. Seu sucessor GM Ding Liren ainda não tem jogos de qualificação suficientes para a inclusão,
+             mas até agora, sua "Qualidade" não está à altura de sua classificação ou de outros campeões mundiais recentes.
+        </p>
+        <p>A seguir está uma lista de campeões não-GOAT:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Jogador</th>			
+                    <th>Anos de pico</th>	
+                    <th>Qualidade</th>	
+                    <th>Est. Elo</th>	
+                    <th>Classificação FIDE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Max Euwe</td><td>1935-1938</td><td>88.87</td><td>2500</td><td>-</td></tr>
+                <tr><td>Tigran Petrosian</td><td>1963-1969</td><td>90.94</td><td>2675</td><td>2650</td></tr>
+                <tr><td>Boris Spassky</td><td>1965-1970</td><td>91.01</td><td>2681</td><td>2671</td></tr>
+                <tr><td>Anatoly Karpov</td><td>1974-1984</td><td>91.82</td><td>2746</td><td>2706</td></tr>
+                <tr><td>Vladimir Kramnik</td><td>2000-2007</td><td>92.31</td><td>2785</td><td>2776</td></tr>
+                <tr><td>Veselin Topalov</td><td>2005-2009</td><td>92.16</td><td>2773</td><td>2787</td></tr>
+                <tr><td>Viswanathan Anand</td><td>2007-2014</td><td>92.25</td><td>2780</td><td>2791</td></tr>
+            </tbody>
+        </table>
+        
+        <p>
+            Note-se que os três últimos campeões desta lista tinham pontuações de qualidade muito semelhantes e, portanto, estimaram Elo,
+             bem como classificações médias da FIDE. Todos eles também tiveram classificações máximas da FIDE dentro de alguns pontos de 2820,
+             o que provavelmente equivale a cerca de 2780 nas classificações de hoje. Quase todas as classificações estimadas para os campeões mundiais
+             e outros GOATS parecem muito razoáveis, exceto talvez para Euwe, que parece muito baixo para um jogador que provavelmente estava entre os
+             cinco primeiros em 1935-1938. Tendo a maioria de seus jogos contra um adversário, Alekhine, que jogou aberturas super-afiadas que levam a
+            grandes taxas de erro para ambos os lados, é o motivo provável.
+        </p>
+        
+        <p>Agora vem uma lista de desafiantes e outros grandes jogadores:</p>
+        
+        <table>
+            <thead><tr><th>Jogador</th>	<th>Anos de pico</th>			       <th> Qualidade</th>	<th>Est.Elo</th>	    <th>Classificação FIDE</th></tr></thead>
+            <tbody>
+                <tr><td>Alexandre McDonnell</td>	<td>1834</td>		                   <td> 78.8</td>	    <td>1704</td>	    <td>-</td></tr>
+                <tr><td>Os 4 principais adversários de Morphy</td>	<td>1857-1859</td>	<td>82.76</td>	    <td>2021</td>	<td>-</td></tr>
+                <tr><td>Adolfo Anderssen</td>			            <td>1861-1866</td>	<td>85.17</td>	<td>2214</td>	<td>-</td></tr>
+                <tr><td>Luís Paulsen</td>				            <td>1861-1862</td>	<td>85.4</td>	<td>2232</td>	<td>-</td></tr>
+                <tr><td>Johannes Zukertort</td>			            <td>1872-1886</td>	<td>85.78</td>	<td>2262</td>	<td>-</td></tr>
+                <tr><td>Mikhail Chigorin</td>			           <td> 1889-1893</td>	<td>84.3</td>	<td>2144</td>	<td>-</td></tr>
+                <tr><td>Siegbert Tarrasch</td>			            <td>1893-1908</td>	<td>87.52</td>	<td>2402</td>	<td>-</td></tr>
+                <tr><td>Geza Maroczy</td>				           <td> 1905-1907</td>	<td>87.03</td>	<td>2362</td>	<td>-</td></tr>
+                <tr><td>Akiba Rubinstein</td>			            <td>1908-1912</td>	<td>88.18</td>	<td>2454</td>	<td>-</td></tr>
+                <tr><td>Efim Bogolyubov	</td>			           <td> 1928-1934</td>	<td>87.68</td>	<td>2414</td>	<td>-</td></tr>
+                <tr><td>David Bronstein	</td>			            <td>1950-1954</td>	<td>89.78</td>	<td>2582</td>	<td>-</td></tr>
+                <tr><td>Sam Reshevsky	</td>			           <td> 1953-1961</td>	<td>90.69</td>	<td>2655</td>	<td>-</td></tr>
+                <tr><td>Paulo Keres	</td>			               <td> 1956-1965</td>	<td>90.79</td>	<td>2663</td>	<td>-</td></tr>
+                <tr><td>Viktor Korchnoi</td>				           <td> 1974-1981</td>	<td>90.72</td>	<td>2658</td>	<td>2689</td></tr>
+                <tr><td>Vasyl Ivanchuk</td>				           <td> 1990-1992</td>	<td>90.67</td>	<td>2654</td>	<td>2718</td></tr>
+                <tr><td>Ian Nepomniatchi</td>			           <td> 2020-2022</td>	<td>92.32</td>	<td>2786</td>	<td>2788</td></tr>
+                <tr><td>Candidatos 2020-21</td>			            <td>2020-2021</td>	<td>92.21</td>	<td>2777</td>	<td>2770</td></tr>
+            </tbody>
+        </table>
+        
+        <p>
+            Surpreendentemente, os quatro principais adversários de Morphy tiveram uma média de pouco mais de 2000 e quase 400 abaixo de Morphy,
+            uma diferença obscenamente grande! Ele poderia facilmente ter dado a eles todas as probabilidades de peão e movimento
+             (como era frequentemente feito na época) e ganhou, talvez até mesmo probabilidades de cavaleiro.
+            Paulsen e Anderssen alcançaram pelo menos o nível de mestre nacional (2200) e cada um teria sido GOAT na década de 1860 se Morphy nunca tivesse jogado.
+        </p>
+        <p>
+            A classificação baixa, sub-2200 de Mikhail Chigorin me surpreende aqui, assim como a baixa classificação (mal IM)
+            do GM Efim Bogoljubow. No caso de Chigorin, a razão é certamente sua predileção por gambits, o que levou a grandes taxas
+             de erro para ambos os lados. No caso de Bogo, o problema é o mesmo de Euwe, que eles só tiveram um adversário repetido
+             (Alekhine) que favoreceu aberturas afiadas. Eu realmente deveria exigir que dois adversários distintos estivessem nas minhas listas!
+        </p>
+        <picture>
+            <img src="imagens/CHIGORIM.jpg" alt="Chigorim">
+            <p>Chigorin: Desafiou Steinitz duas vezes para o campeonato mundial, mas não o jogador mais preciso que se vê. Foto: Biblioteca Pública de Cleveland/Wikimedia, CC.</p>
+        </picture>
+        
+        <p>
+            O GM Samuel Reshevsky merece destaque especial, pois até superou seu grande rival Fine, que entrou na lista do GOAT, mas como o fez após o pico de Botvinnik,
+            ele perdeu a lista por apenas quatro pontos Elo. Da mesma forma, Keres teria sido GOAT, exceto que ele não conseguiu passar Smyslov. O pico do GM Viktor Korchnoi
+            estava na mesma faixa de Keres e Reshevsky, mas só mais tarde, após o pico de Fischer.
+        
+        </p>
+        <p>
+            O recente GM Ian Nepomiachtchi, duas vezes desafiante, está a dois Elo de sua classificação média da FIDE durante esses anos,
+             à frente de todos os campeões mundiais, exceto os "três grandes" de Fischer, Kasparov e Carlsen, com Kramnik apenas um Elo atrás em quinto lugar geral,
+            seguido de perto pelo GM Viswanathan Anand. Eu gostaria de ter incluído o GM Fabiano Caruana na lista, mas sua luta pelo título não teve resultados decisivos
+            (em jogos padrão), e por isso ele não tem jogos suficientes para esta lista. Ele pode muito bem ser o número dois de todos os tempos, com base no pico de
+             classificação da FIDE e na deflação desde o pico de Kasparov, mas não posso confirmar isso.
+        </p>
+        
+        <picture>
+            <img src="imagens/CARUNEPO.jpg" alt="Caruana ,Nepomiachtchi">
+            <p>Caruana e Nepomniachtchi: Os vencedores dos três últimos Torneios de Candidatos; não é bem GOATs. Foto: Maria Emelianova/Xadrez.com.</p>
+        </picture>
+        
+        <p>Note que Pillsbury, Fine e Reshevsky aparecem no site da Chess Metrics como número um do mundo por pelo menos alguns meses, confirmando minhas descobertas de "Qualidade".</p>
+        
+        <p>Agora chegamos às campeãs mundiais femininas, suas desafiantes e, claro, a GM Judit Polgar, que optou por competir apenas em torneios mistos.</p>
+        
+        <p>
+            Maiores jogadoras de todos os tempos, desde seus anos de auge. As classificações da FIDE são médias durante esses anos.
+            Apenas as classificações da FIDE após 1986 são mostradas para as mulheres, uma vez que a paridade com as classificações dos homens só
+            foi estabelecida no final de 1986.
+        </p>
+        
+        <table>
+            <thead><tr><th>Jogador</th>	            <th>Anos de pico</th>	<th>Qualidade</th>	<th>Est. Elo</th>	<th>Classificação FIDE</th></tr></thead>
+            <tbody>
+                <tr><td>Vera Menchik</td>		<td>1929</td>	       <td> 84.44</td>	   <td> 2155</td>		<td>-</td></tr>
+                <tr><td>Elisaveta Bykova</td>	<td>1958-1960</td>	   <td> 85.68</td>	   <td> 2254</td>	   <td> -</td></tr>
+                <tr><td>Alla Kushnir</td>		<td>1965-1972	</td>    <td>87.45	</td>    <td>2396</td>	   <td> -</td></tr>
+                <tr><td>Nona Gaprindashvili</td>	<td>1969-1975</td>	    <td>89.11	</td>    <td>2529</td>	   <td> -</td></tr>
+                <tr><td>Maia Chiburdanidze</td>	<td>1978-1988	</td>    <td>89.81	</td>   <td> 2585</td>	   <td> 2550</td></tr>
+                <tr><td>Susana Polgar</td>		<td>1990-1996</td>	    <td>90.2	</td>    <td>2616	</td>   <td> 2542</td></tr>
+                <tr><td>Judit Polgar</td>		<td>1998-2005	</td>   <td> 90.86	</td>    <td>2669</td>	   <td> 2712</td></tr>
+            <tr></tbody></tr>
+        </table>
+        
+        <p>
+            O número de qualidade de Menchik é baseado em um evento duplo RR contra os homens de topo em 1929, então é um pouco injusto para ela,
+            já que ela foi confrontada com uma oposição mais forte; Vou conceder-lhe um título honorário "NM" ou "WIM" (2200) devido a isso.
+        </p>
+        
+        <p>
+            Digno de nota é o enorme salto da GM Nona Gaprindashvili sobre seus antecessores (WGM Alla Kushnir sendo um rival contemporâneo),
+             maior do que qualquer salto entre os homens de topo desde Morphy. Meus dados confirmam que ela realmente jogou em um nível digno do
+             título de grande mestre, seja para os padrões de hoje ou para os padrões de sua época (quando ela recebeu o título, na verdade,
+            a GM só exigia uma classificação de 2450).
+        </p>
+        
+        <picture>
+            <img src="imagens/Gaprindashvili.jpg" alt="Gaprindashvili">
+            <p>Gaprindashvili: Um salto nos padrões comparável ao Morphy. Foto: Fernando Pereira/Arquivo Nacional Holandês, CC.</p>
+        </picture>
+        
+        <p>
+            A GM Susan Polgar mostrou um nível de jogo significativamente acima de sua classificação FIDE, que não se beneficiou do bônus de 100 pontos dado em 1987
+            a todas as outras mulheres, exceto ela e a GM Pia Cramling. Curiosamente, a irmã de Susan, Judit, ficou 43 abaixo de sua classificação FIDE durante seus
+             anos de pico, embora isso ainda seja bom o suficiente para torná-la a GOAT feminina. Sua preferência por aberturas muito acentuadas pode explicar parte
+            dessa diferença, além do fato de que seu pico foi perto do pico de inflação da FIDE.
+        </p>
+        
+        <p>Campeões Mundiais e Challengers</p>
+        
+        <table>
+            <thead><tr><th>Jogador</th>	                    <th>Anos de pico</th>		<th>Qualidade Est.</th> 	<th>Rating</th>	<th>Classificação FIDE</th></tr></thead>
+            <tbody>
+                <tr><td>Xie Jun</td>				        <td>1991-1999</td>	       <td> 89.02</td>	  <td>  2522</td>	<td>2511</td></tr>
+                <tr><td>Hou Yifan</td>			       <td> 2011-2016</td>	       <td> 90.64</td>	  <td>  2651</td>	<td>2646</td></tr>
+                <tr><td>Candidatas Femininas 2019</td>	<td>2019</td>		       <td> 89.13</td>	   <td> 2530</td>	<td>2528</td></tr>
+                <tr><td>Ju Wenjun</td>			       <td> 2018-2023</td>	       <td> 89.57</td>	   <td> 2566</td>	<td>2572</td></tr>
+            </tbody>
+            
+        </table>
+        <p>
+            Vale ressaltar que todas as quatro classificações Elo acima estimadas estão a poucos pontos das classificações reais da FIDE.
+            Certamente parece que não há razão para pensar que as classificações da FIDE das mulheres são muito altas ou muito baixas em geral,
+            o que poderia ser, já que elas jogam entre si no topo. Também é digno de nota que a GM Hou Yifan teria sido facilmente GOAT,
+             mas ela não chegou ao nível de Judit Polgar. Ela seria uma grande favorita para recuperar o título mundial se optasse por competir.
+        </p>
+        
+        <p>
+            É bastante notável que a atual campeã mundial feminina, GM Ju Wenjun, seja apenas 37 Elo mais forte pela minha medida do que Gaprindashvili em
+            seu auge há meio século, e que Gaprindashvili em seu auge cairia bem no meio das Candidatas Femininas de 2019! Ela foi realmente marcante para a época,
+            e ainda está ganhando títulos Sênior Feminino! Na verdade, seu pico se compara com as principais mulheres de hoje quase o mesmo que o pico de Fischer
+            (ao mesmo tempo!) faz com os principais homens de hoje, ou seja, um pouco abaixo do atual campeão, mas em pé de igualdade com os candidatos.
+        </p>
+        
+        <h3 id="m2">Método 2</h3>
+        <p>
+            Agora vem uma lista muito interessante, uma comparação dos picos dos jogadores em relação aos seus tempos. Com efeito,
+            supõe-se que o pico a cada ano teria melhorado em média 2,5 Elo por ano até 2017, o ponto médio do período de pico de Carlsen.
+        </p>
+        
+        <p>
+            Maiores jogadores de todos os tempos em 2017, creditando a todos os jogadores anteriores 2,5 Elo por ano a partir do ponto médio de seu período de pico.
+             Isso compara os jogadores em relação ao seu período de tempo de pico, não absolutamente.
+        </p>
+        
+        <table>
+            <thead><tr><th>Classificão</th>	<th>Jogador</th>			   <th> Rating ajustado ao tempo</th></tr></thead>
+            <tbody>
+                <tr><td>1</td>		   <td> <strong>Bobby Fischer</strong></td>		<td>2917</td></tr>
+                <tr><td>2</td>		   <td> Garry Kasparov</td>		<td>2871</td></tr>
+                <tr><td>3</td>		    <td>Alexandre Alekhine</td>	<td>2864</td></tr>
+                <tr><td>4	</td>	    <td>Emanuel Lasker</td>		<td>2862</td></tr>
+                <tr><td>5</td>		    <td><strong>Magnus Carlsen</strong></td>		<td>2858</td></tr>
+                <tr><td>6</td>		   <td> Mikhail Tal</td>		   <td> 2856</td></tr>
+                <tr><td>7	</td>	    <td>Harry Pillsbury	</td>	<td>2853</td></tr>
+                <tr><td>8</td>		    <td>José Capablanca</td>		<td>2847</td></tr>
+                <tr><td>9	</td>	    <td>Vassily Smyslov	</td>	<td>2842</td></tr>
+                <tr><td>10	</td>	   <td> Rúben Multa	</td>	   <td> 2842</td></tr>
+                <tr><td>11	</td>	    <td>Anatoly Karpov</td>		<td>2841</td></tr>
+                <tr><td>12	</td>	   <td> Mikhail Botvinnik</td>	<td>2823</td></tr>
+                <tr><td>13	</td>	   <td> Vladimir Kramnik</td>	<td>2819</td></tr>
+                <tr><td>14	</td>	   <td> Paulo Morfa</td>		   <td> 2809</td></tr>
+                <tr><td>15	</td>	    <td>Boris Spassky</td>		<td>2805</td></tr>
+                <tr><td>16	</td>	   <td> Samuel Reshevsky</td>	<td>2805</td></tr>
+                <tr><td>17	</td>	    <td>Paulo Keres	</td>	   <td> 2804</td></tr>
+                <tr><td>18	</td>	    <td>Tigran Petrosian</td>	<td>2803</td></tr>
+                <tr><td>19	</td>	   <td> Guilherme Steinitz</td>	<td>2803</td></tr>
+                <tr><td>20	</td>	   <td> Veselin Topalov</td>		<td>2798</td></tr>
+                <tr><td>21	</td>	    <td>Vishy Anand	</td>	   <td> 2796</td></tr>
+            </tbody>
+        </table>
+        
+        <p>
+            Alguns comentários: Não importa como você fatiá-lo, Fischer está sozinho como o maior em relação ao seu período de tempo, com Kasparov como um segundo
+             distante. Embora Kasparov não tenha encabeçado nem no time ajustado nem na lista absoluta, ele é o único jogador a fazer os dois primeiros em ambos!
+        </p>
+        <p>
+            Alekhine estava acumulando grandes pontuações contra adversários de ponta em seu auge, assim como Lasker, então parece razoável que esses
+            jogadores estejam acima de Carlsen nesta base. Morphy sofre com o fato de que o progresso era muito mais do que 2,5 por ano antes de 1900,
+            além do fato de que ele geralmente jogava mais rápido do que todos os outros; ele poderia ter rivalizado com Fischer pelo primeiro lugar se
+            pudéssemos corrigir adequadamente esses fatores.
+        </p>
+        
+        <picture>
+            <img src="imagens/Alekhine.jpg" alt="Alekhine">
+            
+            <p>Alekhine: Melhor que Magnus? Por algumas maneiras de olhar para ele. Foto: Biblioteca do Congresso, domínio público.</p>
+        </picture>
+
+        <p>
+            Esta lista pode ser comparada com ChessMetrics.com, que também classifica os jogadores em relação ao seu tempo (parando em 2005, no entanto),
+             mas por desempenho, não por jogo. Ambos temos os mesmos dois jogadores no topo (em ordem inversa), e a maioria dos nomes são os mesmos em ambos os top 20
+             (excluindo Carlsen e Topalov devido ao corte de 2005). Ele exclui Fine, Keres, Spassky e Morphy, com os três primeiros dentro da próxima dúzia de pontos.
+             Eu excluo GM Geza Maroczy, Korchnoi, Siegbert Tarrasch e GM Vasyl Ivanchuk, mas Korchnoi chegou perto enquanto Maroczy e Ivanchuk não jogaram partidas pelo título,
+             então preciso de mais dados sobre eles. Enfim, é uma boa confirmação da metodologia.
+        </p>
+        
+        <h3 id="m3">Método 3</h3>
+        
+        <p>
+            Em seguida, há outra lista reduzindo o ajuste para dois Elo por ano, o que eu estimo que deve tornar a lista uma estimativa bastante precisa de
+            como esses jogadores, de fato, avaliariam em 2017 se nascessem por volta de 1987.
+        
+        </p>
+        <p>
+            Maiores jogadores de todos os tempos em 2017 (ponto médio do pico de Carlsen), creditando a todos os jogadores anteriores 2 Elo por ano a partir do ponto médio
+             de seu período de pico. Isso estima como eles avaliariam em 2017 se nascessem por volta de 1987.
+        </p>
+        
+        <table>
+            <thead><tr>
+                <th>Classificar</th>	    <th>Jogador	</th>		<th>Rating Se Idade 30 Agora
+            </tr></th></thead>
+            <tbody>
+                <tr><td>1</td>	    	    <td> <strong>Bobby Fischer</strong></td>		<td>2894</td></tr>
+                <tr><td>2</td>		        <td><strong>Garry Kasparov</strong></td>		<td>2861</td></tr>
+                <tr><td>3</td>		        <td><strong>Magnus Carlsen</strong></td>		<td>2858</td></tr>
+                <tr><td>4</td>	    	    <td> Mikhail Tal</td>		<td>2827</td></tr>
+                <tr><td>5</td>	        	<td>Anatoly Karpov</td>		<td>2822</td></tr>
+                <tr><td>6</td>	        	<td>Alexandre Alekhine</td>	<td>2821</td></tr>
+                <tr><td>7</td>	        	<td>Vladimir Kramnik</td>	<td>2812</td></tr>
+                <tr><td>8</td>	        	<td>Vassily Smyslov</td>	<td>2811</td></tr>
+                <tr><td>9</td>	        	<td>Emanuel Lasker	</td>	<td>2809</td></tr>
+                <tr><td>10</td>	        	<td>Rúben Multa</td>		<td>2804</td></tr>
+                <tr><td>11</td>	          	<td>José Capablanca	</td>	<td>2801</td></tr>
+                <tr><td>12</td>	    	    <td> Vishy Anand</td>		<td>2793</td></tr>
+                <tr><td>13</td>	           	<td>Veselin Topalov	</td>	<td>2793</td></tr>
+                <tr><td>14</td>	            <td>	Harry Pillsbury</td><td>2793</td></tr>
+                <tr><td>15</td>	       	    <td>Mikhail Botvinnik</td>	<td>2790</td></tr>
+                <tr><td>16</td>	    	    <td> Boris Spassky</td>		<td>2780</td></tr>
+                <tr><td>17</td>	    	    <td>Tigran Petrosian</td>	<td>2777</td></tr>
+                <tr><td>18</td>	    	    <td>Paulo Keres	</td>	    <td>2776</td></tr>
+                <tr><td>19</td>	    	    <td>Samuel Reshevsky</td>	<td>2775</td></tr>
+                <tr><td>20</td>	    	    <td> Guilherme Steinitz</td><td>2734</td></tr>
+                <tr><td>21</td>	    	    <td>Paulo Morfa	</td>	    <td>2729</td></tr>
+            </tbody>
+        </table>
+        
+        <p>
+            Novamente Fischer está sozinho no topo, com Kasparov superando Carlsen em segundo. Ninguém mais está perto, mas todos os outros jogadores da lista
+            pós-Steinitz estimaram classificações dentro ou acima da faixa de Nakamura, Caruana, Ding, Nepomniachtchi e GM Alireza Firouzja, números de dois a seis
+             na lista da FIDE de agosto de 2023.
+        </p>
+    
+        <p>
+            Em outras palavras, todos os jogadores do quarto ao 19º desta lista tinham aptidão para o xadrez para serem candidatos hoje se tivessem cerca de
+             30 anos agora e cresceram com as mesmas ferramentas que Carlsen e seus rivais. Tenho certeza que Morphy também pertence a esta lista devido aos
+            fatores acima mencionados. Qualquer um dos jogadores acima de 2800 na lista provavelmente seria o rival mais próximo de Carlsen hoje nessas condições.
+        
+        </p>
+        <picture>
+            <img src="imagens/Botvinnik e Smyslov.jpg" alt="Botvinnik e Smyslov">
+            <p>Botvinnik e Smyslov: Dois dos grandes, em qualquer época. Foto: Arquivo Nacional Holandês, CC.</p>
+        </picture>
+        <p>
+            Claro, isso não considera circunstâncias individuais; por exemplo, Reshevsky e Lasker não eram profissionais de xadrez em tempo integral e,
+            portanto, poderiam ser ainda maiores se fossem, enquanto Fischer não fez nada além de xadrez, então talvez possa ser um pouco superestimado em
+            2894 em comparação com os outros. Mas acho que a conclusão básica é válida, que todos os jogadores acima (exceto talvez Steinitz)
+             seriam considerados superestrelas se tivessem crescido com a internet e os motores.
+        </p>
+        
+        <p>
+            E se?
+            Agora vamos responder algumas perguntas históricas. Que tal a partida inédita Fischer x Karpov de 1975? Karpov estava dentro de sua faixa de pico em 2746,
+            enquanto Fischer estava a três anos de 2802. Para ter mais clareza, verifiquei o desempenho de Fischer em sua revanche de 1992 com Spassky.
+             A "Qualidade" de Fischer foi de 91,50 = 2720, enquanto a de Spassky foi de 89,50 = 2560. Assim, Fischer estava a 82 de seu pico,
+            enquanto Spassky estava a 121 de seu pico um pouco anterior.
+        </p>
+        
+        <p>
+            Aliás, Susan Polgar estimou para mim que o nível de Fischer em 1993 (quando eles jogaram muito Fischer Random Chess) era "2650 a 2700", o que não
+            está muito abaixo do meu número de 2720 para 1992 (com base em apenas 15 jogos decisivos). Assim, em 1975, Fischer tinha cerca de 2790 se assumirmos
+             decaimento linear, bem acima do 2746 de Karpov. Não há muita dúvida sobre este. Se tivessem esperado até 1984, o fim do período de pico de Karpov,
+             Fischer teria sido cerca de 2753, então, dada a incerteza desse método, poderíamos chamar o hipotético jogo de 1984 de um arremesso.
+        </p>
+        
+        <p>
+            Que tal uma revanche Alekhine x Capablanca, que Alekhine conseguiu evitar? Supondo que foi realizado em 1930 (três anos a partir da primeira partida),
+             isso ainda estava dentro do período de pico para ambos, e o pico de Alekhine foi 29 Elo mais alto, então a vantagem vai para Alekhine, embora esteja
+             perto o suficiente para deixar algumas dúvidas.
+        </p>
+        
+        <p>
+            E se Alekhine tivesse defendido seu título em 1939 ou 1940 contra Keres ou Fine, que dividiu a primeira em Avro 1938 (Keres vencendo no tiebreak)? Como o
+            pico de Fine incluía esse período, enquanto Alekhine já havia atingido um pico um pouco menor, Fine era um claro favorito. Keres não atingiu o pico até a
+            década de 1950, então não está tão claro se ele teria derrotado Alekhine em 1940.
+        </p>
+        
+        <picture>
+            <img src="imagens/Keres e Fine.jpg" alt="Keres e Fine">
+            <p>Keres e Fine: Sem a Segunda Guerra Mundial, qualquer um poderia ter se tornado um campeão mundial?</p>
+        </picture>
+        
+        <p>
+            Emanuel Lasker era esperado para jogar partidas com Maroczy e GM Akiba Rubinstein, mas nenhum dos dois se concretizou.
+            Embora eles fossem adversários plausíveis para Lasker antes de Capablanca, especialmente Rubinstein, meus dados mostram que
+            nenhum dos dois teve chance contra Lasker, que estava em uma classe sozinho até Capablanca passá-lo.
+        </p>
+        
+        <picture>
+            <img src="imagens/LASKER.jpg" alt="Emanuel Lasker">
+            <p>Lasker: Não jogou todos os challengers; provavelmente não precisava.</p>
+        </picture>
+        
+        <h2>Clássico vs. Rápido e Blitz</h2>
+        <p>Outra característica bacana dessa figura de qualidade é que ela permite a comparação entre xadrez clássico e rápido, ou mesmo blitz.</p>
+        
+        <p>
+            Comecemos por Magnus Carlsen, cuja Chess.com Qualidade Rápida no ano passado (com um controle de tempo médio de cerca de 12 minutos mais três segundos de incremento,
+             ou 12+3) foi de 91,21, em comparação com 93,23 para sua média nos controles de tempo clássicos como campeão mundial, o que significaria um Elo estimado de 2697
+            se alguém tivesse esse resultado em controles de tempo clássicos. Assim, Magnus caiu 161 Elo em Qualidade, jogando rápido em comparação com o clássico.
+             Sua qualidade nos jogos rápidos excedeu a qualidade clássica de controle de tempo de todos os campeões mundiais e desafiantes antes de 1970,
+             exceto Tal em 1958-1960.
+        
+        </p>
+        
+        <picture>
+            <img src="imagens/JOGO RAPIDO CAL.jpg" alt="">
+            <p>Jogo rápido melhor do que o clássico de 60 anos atrás. Concordar? Foto: Maria Emelianova/Xadrez.com.</p>
+        </picture>
+        
+        <p>
+            Para um segundo exemplo, Nepomniachtchi no Chess.com Rapid no ano passado mostrou uma qualidade média de 89,57 (seu controle de tempo médio nesses jogos foi
+             de cerca de 10+2), em comparação com 92,32 para o Classical. Assim, seu jogo caiu em 220 pontos Elo indo do clássico para o rápido rápido, mas seus jogos
+            rápidos foram, em média, jogos mais curtos do que os de Carlsen, o que deve explicar parte da diferença entre 160 e 220. Com base no número um do mundo e
+            desafiante ao título mundial nos últimos dois ciclos, acho que é justo dizer que a qualidade de jogo em fast rapid, digamos 10+2, é cerca de 200 Elo abaixo do
+            jogo clássico.
+        </p>
+        
+        <p>
+            E a blitz? Para os melhores jogadores, blitz significa uma mistura de 3+1 jogos em eventos como Titled Tuesday e 3+0 jogos fora do torneio.
+            No caso de Nepo, sua blitz de qualidade no ano passado foi de 85,02, uma queda de 4,55 em relação à rápida, que em 80 pontos FIDE Elo por ponto
+             de qualidade é uma queda de 364 pontos FIDE Elo. Para Carlsen, sua qualidade de blitz teve média de 87,96, o equivalente a uma queda de 260 pontos
+             do Elo de rápido.
+        </p>
+        
+        <p>
+            Aqui estão alguns outros jogadores notáveis com pelo menos 50 blitz e 50 jogos rápidos no ano passado, com qualidade rápida, qualidade de blitz e
+            queda implícita FIDE Elo:
+        </p>
+        
+        <table>
+            <thead><tr><th>Jogador</th>			<th>Qualidade Rápida</th>	<th>Qualidade Blitz	</th>	<th>Elo Mudança</th></tr></thead>
+            <tbody>
+                <tr><td>Hikaru Nakamura	</td>	   <td> 88.57</td>			<td>86.66</td>			<td>-153 Elo</td></tr>
+                <tr><td>Wesley So</td>		        <td>89.11</td>			<td>87.13</td>			<td>-158 Elo</td></tr>
+                <tr><td>Fabiano Caruana</td>		   <td> 89.21</td>			<td>86.10</td>			<td>-249 Elo</td></tr>
+                <tr><td>Alireza Firouzja</td>	   <td> 87.89</td>			<td>86.57</td>			<td>-106 Elo</td> </tr>
+                <tr><td>Nihal Sarin</td>		       <td> 89.88</td>			<td>86.90</td>			<td>-238 Elo</td></tr>
+                <tr><td>Vladimir Fedoseev</td>	    <td>89.03</td>			<td>86.25</td>			<td>-222 Elo</td></tr>
+                <tr><td>Maxime Vachier-Lagrave</td>	<td>89.32</td>			<td>87.08</td>			<td>-179 Elo</td></tr>
+            </tbody>
+        </table>
+        
+        <p>Além de um streamer de classificação muito mais baixa (2085 FIDE) com jogos suficientes contra adversários adequados apenas para mostrar que a queda não é muito diferente neste nível:</p>
+        
+        <table>
+            <thead><tr><th>Jogador</th>			<th>Qualidade Rápida</th>	<th>Qualidade Blitz</th>		<th>Elo Mudança</th></tr></thead>
+            <tbody><tr><td>Anna Cramling</td>		<td>83.26</td>		<td>	80.68</td>			   <td> -206 Elo</td></tr></tbody>
+        </table>
+        
+        
+        <p>
+            Assim, a média de queda rápida de blitz rápida para os dez jogadores foi de 213,5 Elo, um pouco mais do que a queda do clássico para o rápido rápido.
+            O jogo rápido é certamente um nível muito mais alto do que a blitz, mas se você quiser um bom compromisso, posso recomendar a blitz 3+2,
+             pois meus estudos mostram que o incremento aumenta a Qualidade mais do que uma adição comparável ao tempo base (jogos 3+2 são significativamente
+            maiores em Qualidade do que jogos puros de cinco minutos).
+        </p>
+        
+        <p>
+            Também é digno de nota que Magnus mostra mais de 100 Elo mais rápido Elo do que seu rival mais próximo na lista acima (GM Nihal Sarin),
+             e de fato ele lidera a lista rápida (excluindo alguns nomes que têm poucos ou nenhum jogo contra GM ou IM oposição) por uma ampla margem.
+        </p>
+        
+        <h2 id="cc">Conclusão</h2>
+        <p>
+            Finalmente, para mostrar como você pode usar esse método para comparar seu próprio jogo clássico em diferentes momentos de sua vida
+            (se você tiver idade suficiente!), olhei para minha própria história, escolhendo os três períodos em que eu estava focado principalmente
+            no xadrez competitivo e tive os melhores resultados.
+        </p>
+        
+        <p>
+            Em 1979-1980 eu ganhei facilmente o título IM com pontos extras em três eventos consecutivos, tendo um desempenho bem superior a 2500 FIDE
+            (embora minha classificação só tenha chegado a 2440 na época). Minha "Qualidade" para aqueles anos, considerando todos os jogos decisivos
+            no banco de dados contra adversários avaliados pelo menos 2200, foi de 89,53 = 2562, talvez 50 Elo acima do meu desempenho.
+        
+        </p>
+        <p>
+            Em 1995-1999 voltei ao xadrez competitivo depois de uma longa demissão, com uma modesta queda na classificação da FIDE (de um pico de 2445
+             para uma média de 2414), com uma "Qualidade" de 87,53 = 2398, muito próxima do meu desempenho na época.
+        </p>
+        
+        <p>
+            Depois, de 2008 a 2011, depois de chegar aos 60 anos, joguei regularmente nos Campeonatos Americanos e Mundiais Seniores, com excelentes
+             resultados, conquistando o título de GM ao vencer o Mundial Sênior em 2008, empatar em terceiro em 2009 e empatar em primeiro em 2010.
+            Meu desempenho no Mundial de Seniores foi superior a 2500, embora minha classificação tenha permanecido na casa dos 2400 durante este
+             período devido à perda de pontos em torneios abertos domésticos. Minha "Qualidade" durante este período (principalmente dos eventos Senior)
+             foi de 89,76 = 2581, bem acima do meu desempenho real.
+        </p>
+        
+        <p>
+            Bem, o método não é perfeito, especialmente com amostras pequenas, mas no geral para os três períodos, acho que só superestimou meu desempenho
+            em talvez 30 Elo ou mais. Para mim, a grande surpresa foi que, embora minha classificação não tenha diferido muito nesses períodos, minha melhor
+             qualidade de jogo foi na casa dos sessenta! Só depois dos 64 anos é que comecei claramente a descer.
+        </p>
+        
+        <p>
+            Então, se você quiser aplicar isso aos seus próprios jogos passados, lembre-se de excluir empates, excluir adversários mais de cerca de 200 elo
+             abaixo de você, e adicionar 1,5 por derrota à precisão e subtrair 1,5 por vitória. Você pode ver quando você jogou seu melhor xadrez desta maneira.
+        </p>
+        </main>
+    </div>
+    
+</body>
+</html>
